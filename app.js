@@ -3,12 +3,21 @@ var bodyParser = require('body-parser');
 var user = require('./routes/user.js');
 var app = express();
 
+//Enable req.body method to get data filled by forms
 app.use(bodyParser());
 
+//Logging the request method, url and IP address
+app.use(function(req, res, next){
+  console.log('%s %s %s', req.method, req.url, req.ip);
+  next();
+});
+
+//Default url
 app.get('/', function(req, res){
   res.send('hello world');
 });
 
+//Users route
 app.route('/api/users')
   .get(user.read)
   .post(user.create)
@@ -16,3 +25,4 @@ app.route('/api/users')
   .delete(user.delete)
 
 app.listen(3000);
+console.log('Simple-CRUD-Express4 running');
