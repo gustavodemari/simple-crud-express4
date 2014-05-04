@@ -10,7 +10,9 @@ exports.create = function(req, res){
     users.push(user);
     res.send('Created!');
   }
-  res.send('Something went wrong :(');
+  else{
+    res.send('Invalid input, try again');
+  }
 }
 
 exports.read = function(req, res){
@@ -19,22 +21,36 @@ exports.read = function(req, res){
 
 exports.update = function(req, res){
   var user = req.body.user;
-  for(var i = 0; i < users.length; i++){
-    if(users[i].id===user.id){
-      users[i] = user;
-      res.send('User updated!');
+  if(user){
+    for(var i = 0; i < users.length; i++){
+      if(users[i].id===user.id){
+        users[i] = user;
+        res.send('User updated!');
+      }
+      else{
+        res.send('User not found');
+      }  
     }
   }
-  res.send('Something went wrong :(');
+  else {
+    res.send('Invalid input, try again');
+  }
 };
 
 exports.delete = function(req, res){
   var user = req.body.user;
-  for(var i = 0; i < users.length; i++){
-    if(users[i].id===user.id){
-      users.splice(i);
-      res.send('User deleted!');
+  if(user){
+    for(var i = 0; i < users.length; i++){
+      if(users[i].id===user.id){
+        users.splice(i);
+        res.send('User deleted!');
+      }
+      else{
+        res.send('User not found');
+      }  
     }
   }
-  res.send('Something went wrong :(');
+  else {
+    res.send('Invalid input, try again');
+  }
 };
