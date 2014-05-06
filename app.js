@@ -24,5 +24,7 @@ app.route('/api/users')
   .put(user.update)
   .delete(user.delete)
 
-app.listen(3000);
+var port = Number(process.env.PORT || 5000);
+
+app.listen(port);
 console.log('Simple-CRUD-Express4 running');
