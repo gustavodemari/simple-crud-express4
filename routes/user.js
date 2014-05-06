@@ -2,7 +2,7 @@
 var users = [];
 
 exports.printMethodUrl = function(req, res){
-  res.send(req.method+' '+req.url);
+  res.json(req.method+' '+req.url);
 };
 
 //Creating user method
@@ -11,16 +11,16 @@ exports.create = function(req, res){
   if(user){
     user.id = parseInt(user.id);
     users.push(user);
-    res.send('Created!');
+    res.json(200, {message: 'User created!'});
   }
   else{
-    res.send('Invalid input, try again');
+    res.json(400, {message: 'Invalid input, try again'});
   }
 }
 
 //Reading users array method
 exports.read = function(req, res){
-  res.send(JSON.stringify(users));
+  res.json(200, JSON.stringify(users));
 };
 
 //Update user info method
@@ -31,15 +31,15 @@ exports.update = function(req, res){
     for(var i = 0; i < users.length; i++){
       if(users[i].id===user.id){
         users[i] = user;
-        res.send('User updated!');
+        res.json(200, {message: 'User updated!'});
       }
       else{
-        res.send('User not found');
+        res.json(400, {message: 'User not found'});
       }  
     }
   }
   else {
-    res.send('Invalid input, try again');
+    res.json(400, {message: 'Invalid input, try again'});
   }
 };
 
@@ -51,14 +51,14 @@ exports.delete = function(req, res){
     for(var i = 0; i < users.length; i++){
       if(users[i].id===user.id){
         users.splice(i);
-        res.send('User deleted!');
+        res.json(200, {message: 'User deleted!'});
       }
       else{
-        res.send('User not found');
+        res.json(400, {message: 'User not found'});
       }  
     }
   }
   else {
-    res.send('Invalid input, try again');
+    res.json(400, {message: 'Invalid input, try again'});
   }
 };
