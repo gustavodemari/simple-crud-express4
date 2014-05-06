@@ -33,10 +33,8 @@ exports.update = function(req, res){
         users[i] = user;
         res.json(200, {message: 'User updated!'});
       }
-      else{
-        res.json(400, {message: 'User not found'});
-      }  
     }
+    res.json(400, {message: 'User not found'});
   }
   else {
     res.json(400, {message: 'Invalid input, try again'});
@@ -50,13 +48,11 @@ exports.delete = function(req, res){
     user.id = parseInt(user.id);
     for(var i = 0; i < users.length; i++){
       if(users[i].id===user.id){
-        users.splice(i);
+        users.splice(i, 1);
         res.json(200, {message: 'User deleted!'});
-      }
-      else{
-        res.json(400, {message: 'User not found'});
-      }  
+      } 
     }
+    res.json(400, {message: 'User not found'});
   }
   else {
     res.json(400, {message: 'Invalid input, try again'});
