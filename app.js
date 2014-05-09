@@ -24,6 +24,9 @@ app.route('/api/users')
   .put(user.update)
   .delete(user.delete);
 
+app.route('/api/users/:id')
+  .get(user.read);
+
 var port = Number(process.env.PORT || 5000);
 
 app.listen(port);
